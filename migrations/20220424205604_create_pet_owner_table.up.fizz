@@ -1,0 +1,5 @@
+create_table("pet_owner") {
+  t.Column("id", "integer", {primary: true})
+  t.Column("pet", "integer", {})
+  t.Column("people", "integer", {})
+}

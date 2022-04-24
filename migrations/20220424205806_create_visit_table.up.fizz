@@ -1,0 +1,7 @@
+create_table("visit") {
+  t.Column("id", "integer", {primary: true})
+  t.Column("date", "date", {})
+  t.Column("pet", "integer", {})
+  t.Column("veterinarian", "integer", {})
+  t.Column("reason", "string", {"default": ""})
+}

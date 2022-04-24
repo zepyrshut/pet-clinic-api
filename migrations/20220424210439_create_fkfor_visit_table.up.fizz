@@ -1,0 +1,8 @@
+add_foreign_key("visit", "pet", {"pet":["id"]}, {
+    "on_delete": "cascade",
+    "on_update": "cascade",
+})
+add_foreign_key("visit", "veterinarian", {"veterinarian":["id"]}, {
+    "on_delete": "cascade",
+    "on_update": "cascade",
+})
