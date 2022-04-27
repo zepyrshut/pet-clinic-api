@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/zepyrshut/pet-clinic/internal/config"
-	"github.com/zepyrshut/pet-clinic/internal/driver"
+	"github.com/zepyrshut/pet-clinic/internal/database"
 	"github.com/zepyrshut/pet-clinic/internal/handlers"
 	"github.com/zepyrshut/pet-clinic/internal/middleware"
 	"github.com/zepyrshut/pet-clinic/internal/routes"
@@ -44,7 +44,7 @@ func main() {
 	app.ErrorLog = log.New(os.Stdout, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
 
 	// Initialize database
-	db, err := driver.ConnectSQL(app.Config.DB.DSN)
+	db, err := database.ConnectSQL(app.Config.DB.DSN)
 	if err != nil {
 		app.ErrorLog.Fatal(err)
 	}
