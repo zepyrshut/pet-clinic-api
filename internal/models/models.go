@@ -79,3 +79,14 @@ type PersonDTO struct {
 	CreatedAt time.Time    `json:"created_at"`
 	UpdatedAt time.Time    `json:"updated_at"`
 }
+
+type PetDTO struct {
+	ID        uint      `json:"id"`
+	PetName   string    `json:"pet_name" form:"pet_name" binding:"required"`
+	PetType   string    `json:"pet_type" form:"pet_type" binding:"required"`
+	PetRace   string    `json:"pet_race" form:"pet_race"`
+	BirthDate time.Time `json:"birth_date" form:"birth_date" binding:"required" time_format:"2006-01-02"`
+	Person    Person    `json:"person"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
+}

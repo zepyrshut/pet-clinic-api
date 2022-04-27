@@ -4,13 +4,14 @@ Todos los cambios realizados en este proyecto irán aquí.
 [Versionado semántico](https://semver.org/spec/v2.0.0.html), [Mayor.Menor.Parche-Status.Commit]
 
 
-## [0.1.0beta.2](#) - 2022-04-27
+## [0.1.1beta.3](#) - 2022-04-27
 ### Añadido
 - Servicio personas (dueños de las mascotas).
+- Servicio mascotas (vinculación con el propietario).
 - Validación en todas las entidades.
 - Internacionalización básica. Funciona, pero no tiene funcionalidad.
 - Capa interceptora con funciones de sesión, CORS e internacionalización.
-- DTO para persona.
+- DTO para persona y mascota.
 - Repositorio persona. Funciones nueva persona, una persona y vincular mascota a la persona.
 - Rutas a los nuevos servicios.
 - Utilidades de pruebas.

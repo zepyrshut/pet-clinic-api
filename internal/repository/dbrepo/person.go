@@ -106,8 +106,6 @@ func (m *postgreDBRepo) appendPet(id *models.PersonDTO) (*models.PersonDTO, erro
 
 	}
 
-	m.App.InfoLog.Println(petsAppend)
-
 	id.Pets = petsAppend
 	return id, nil
 

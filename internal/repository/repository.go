@@ -4,10 +4,10 @@ import "github.com/zepyrshut/pet-clinic/internal/models"
 
 type DBRepo interface {
 	// Pet
-	NewPet(pet models.Pet) error       // C
-	OnePet(id int) (models.Pet, error) // R
-	//UpdatePet(pet models.Pet) error    // U
-	//DeletePet(id int) error            // D
+	NewPet(pet models.Pet) error       
+	OnePet(id int) (models.PetDTO, error) 
+	//UpdatePet(pet models.Pet) error    
+	//DeletePet(id int) error            
 
 	//AllPets() ([]models.Pet, error)
 
