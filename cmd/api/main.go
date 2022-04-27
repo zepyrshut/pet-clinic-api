@@ -5,16 +5,16 @@ import (
 	"log"
 	"os"
 
-	"github.com/zepyrshut/go-web-starter-gin/internal/config"
-	"github.com/zepyrshut/go-web-starter-gin/internal/driver"
-	"github.com/zepyrshut/go-web-starter-gin/internal/handlers"
-	"github.com/zepyrshut/go-web-starter-gin/internal/middleware"
-	"github.com/zepyrshut/go-web-starter-gin/internal/routes"
-	"github.com/zepyrshut/go-web-starter-gin/internal/util"
+	"github.com/zepyrshut/pet-clinic/internal/config"
+	"github.com/zepyrshut/pet-clinic/internal/driver"
+	"github.com/zepyrshut/pet-clinic/internal/handlers"
+	"github.com/zepyrshut/pet-clinic/internal/middleware"
+	"github.com/zepyrshut/pet-clinic/internal/routes"
+	"github.com/zepyrshut/pet-clinic/internal/util"
 )
 
 // Application properties
-const version = "0.0.1-beta.1"
+const version = "0.1.0-beta.2"
 const environment = "development"
 const inProduction = false
 
@@ -55,10 +55,10 @@ func main() {
 	repo := handlers.NewRepo(&app, db)
 	handlers.NewHandlers(repo)
 	middleware.NewMiddleware(&app)
-	srv := routes.Routes()
+	server := routes.Routes()
 
 	// Start server
-	err = srv.Run(":" + app.Config.Port)
+	err = server.Run("localhost:" + app.Config.Port)
 	if err != nil {
 		app.ErrorLog.Println(err)
 	}

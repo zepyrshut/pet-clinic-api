@@ -21,10 +21,10 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: people; Type: TABLE; Schema: public; Owner: postgres
+-- Name: person; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.people (
+CREATE TABLE public.person (
     id integer NOT NULL,
     first_name character varying(255) NOT NULL,
     last_name character varying(255) DEFAULT ''::character varying NOT NULL,
@@ -35,13 +35,13 @@ CREATE TABLE public.people (
 );
 
 
-ALTER TABLE public.people OWNER TO postgres;
+ALTER TABLE public.person OWNER TO postgres;
 
 --
--- Name: people_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: person_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public.people_id_seq
+CREATE SEQUENCE public.person_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -50,13 +50,13 @@ CREATE SEQUENCE public.people_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.people_id_seq OWNER TO postgres;
+ALTER TABLE public.person_id_seq OWNER TO postgres;
 
 --
--- Name: people_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: person_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public.people_id_seq OWNED BY public.people.id;
+ALTER SEQUENCE public.person_id_seq OWNED BY public.person.id;
 
 
 --
@@ -105,7 +105,7 @@ ALTER SEQUENCE public.pet_id_seq OWNED BY public.pet.id;
 CREATE TABLE public.pet_owner (
     id integer NOT NULL,
     pet integer NOT NULL,
-    people integer NOT NULL,
+    person integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -223,10 +223,10 @@ ALTER SEQUENCE public.visit_id_seq OWNED BY public.visit.id;
 
 
 --
--- Name: people id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: person id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.people ALTER COLUMN id SET DEFAULT nextval('public.people_id_seq'::regclass);
+ALTER TABLE ONLY public.person ALTER COLUMN id SET DEFAULT nextval('public.person_id_seq'::regclass);
 
 
 --
@@ -258,11 +258,11 @@ ALTER TABLE ONLY public.visit ALTER COLUMN id SET DEFAULT nextval('public.visit_
 
 
 --
--- Name: people people_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: person person_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.people
-    ADD CONSTRAINT people_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.person
+    ADD CONSTRAINT person_pkey PRIMARY KEY (id);
 
 
 --
@@ -305,11 +305,11 @@ CREATE UNIQUE INDEX schema_migration_version_idx ON public.schema_migration USIN
 
 
 --
--- Name: pet_owner pet_owner_people_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: pet_owner pet_owner_person_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.pet_owner
-    ADD CONSTRAINT pet_owner_people_id_fk FOREIGN KEY (people) REFERENCES public.people(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT pet_owner_person_id_fk FOREIGN KEY (person) REFERENCES public.person(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --

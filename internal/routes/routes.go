@@ -2,12 +2,11 @@ package routes
 
 import (
 	"github.com/gin-contrib/cors"
-	"github.com/gin-contrib/sessions"
-	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
-	csrf "github.com/utrack/gin-csrf"
-	"github.com/zepyrshut/go-web-starter-gin/internal/config"
-	"github.com/zepyrshut/go-web-starter-gin/internal/handlers"
+	"github.com/zepyrshut/pet-clinic/internal/config"
+	"github.com/zepyrshut/pet-clinic/internal/handlers"
+	"github.com/zepyrshut/pet-clinic/internal/middleware"
+	"github.com/zepyrshut/pet-clinic/internal/util"
 )
 
 var app *config.Application
@@ -20,45 +19,31 @@ func Routes() *gin.Engine {
 
 	router := gin.Default()
 
-	store := cookie.NewStore([]byte(app.Config.Session.Secret))
-
 	// CORS and CSRF protection
 	router.Use(cors.Default())
-	router.Use(sessions.Sessions("session", store))
-	router.Use(csrf.Middleware(csrf.Options{
-		Secret:    app.Config.Session.Secret,
-		ErrorFunc: func(c *gin.Context) { c.String(400, "CSRF token mismatch") },
-	}))
+	router.Use(middleware.Localize())
+	router.Use(middleware.Sessions("session"))
+	router.Use(middleware.CORSMiddleware())
 
-	// Status
+	// Status and test
 	router.GET("/status", handlers.Repo.GetStatusHandler)
+	router.GET("/localize", util.GetLocalize)
 
 	// Pets
 	router.GET("/one-pet/:id", handlers.Repo.GetOnePet)
+	router.POST("/new-pet", handlers.Repo.InsertNewPet)
 
-	// Testing CSRF and sessions
-	router.GET("/protected", func(c *gin.Context) {
-		c.String(200, csrf.GetToken(c))
-	})
+	// People
+	router.GET("/one-person/:id", handlers.Repo.GetOnePerson)
+	router.POST("/new-person", handlers.Repo.InsertNewPerson)
 
-	router.POST("/protected", func(c *gin.Context) {
-		c.String(200, "CSRF token is valid")
-	})
+	// PetOwner
+	router.POST("/bind-pet-owner", handlers.Repo.BindPetWithOwner)
 
-	router.GET("/incr", func(c *gin.Context) {
-		session := sessions.Default(c)
-		var count int
-		v := session.Get("count")
-		if v == nil {
-			count = 0
-		} else {
-			count = v.(int)
-			count++
-		}
-		session.Set("count", count)
-		session.Save()
-		c.JSON(200, gin.H{"count": count})
-	})
+	//Testing sessions and CSRF protection
+	router.GET("/incr", util.Increment)
+	router.GET("/protected", util.GetToken)
+	router.POST("/protected", util.PostToken)
 
 	return router
 

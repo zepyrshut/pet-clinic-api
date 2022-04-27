@@ -3,8 +3,8 @@ package dbrepo
 import (
 	"database/sql"
 
-	"github.com/zepyrshut/go-web-starter-gin/internal/config"
-	"github.com/zepyrshut/go-web-starter-gin/internal/repository"
+	"github.com/zepyrshut/pet-clinic/internal/config"
+	"github.com/zepyrshut/pet-clinic/internal/repository"
 )
 
 type postgreDBRepo struct {

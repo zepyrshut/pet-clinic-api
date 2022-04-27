@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/zepyrshut/go-web-starter-gin/internal/config"
+	"github.com/zepyrshut/pet-clinic/internal/config"
 )
 
 func (m *Repository) GetStatusHandler(c *gin.Context) {

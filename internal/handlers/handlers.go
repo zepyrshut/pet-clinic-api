@@ -1,10 +1,10 @@
 package handlers
 
 import (
-	"github.com/zepyrshut/go-web-starter-gin/internal/config"
-	"github.com/zepyrshut/go-web-starter-gin/internal/driver"
-	"github.com/zepyrshut/go-web-starter-gin/internal/repository"
-	"github.com/zepyrshut/go-web-starter-gin/internal/repository/dbrepo"
+	"github.com/zepyrshut/pet-clinic/internal/config"
+	"github.com/zepyrshut/pet-clinic/internal/driver"
+	"github.com/zepyrshut/pet-clinic/internal/repository"
+	"github.com/zepyrshut/pet-clinic/internal/repository/dbrepo"
 )
 
 var Repo *Repository
