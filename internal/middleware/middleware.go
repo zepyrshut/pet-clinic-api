@@ -36,7 +36,7 @@ func CORSMiddleware() gin.HandlerFunc {
 
 func Localize() gin.HandlerFunc {
 	config := ginI18n.WithBundle(&ginI18n.BundleCfg{
-		RootPath:         "internal/i18n",
+		RootPath:         "../../internal/i18n",
 		AcceptLanguage:   []language.Tag{language.English, language.Spanish},
 		DefaultLanguage:  language.Spanish,
 		UnmarshalFunc:    yaml.Unmarshal,
