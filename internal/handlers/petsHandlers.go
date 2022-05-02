@@ -59,3 +59,20 @@ func (m *Repository) GetOnePet(c *gin.Context) {
 		"pet":    pet,
 	})
 }
+
+func (m *Repository) GetAllPets(c *gin.Context) {
+	pets, err := m.DB.AllPets()
+	if err != nil {
+		m.App.InfoLog.Println(err)
+		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{
+			"status": "not found",
+			"error":  err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"status": "success",
+		"pets":   pets,
+	})
+}

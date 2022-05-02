@@ -14,7 +14,7 @@ import (
 )
 
 // Application properties
-const version = "0.1.1-beta.3"
+const version = "0.1.3-beta.5"
 const environment = "development"
 const inProduction = false
 

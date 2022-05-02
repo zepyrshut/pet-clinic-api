@@ -3,8 +3,11 @@ Todos los cambios realizados en este proyecto irán aquí.
 
 [Versionado semántico](https://semver.org/spec/v2.0.0.html), [Mayor.Menor.Parche-Status.Commit]
 
+## [0.1.3-beta.5](#) - 2022-05-02
+### Añadido
+- Obtener todas las mascotas en la agenda.
 
-## [0.1.2-beta.4](#) - 2022-04-28
+## [0.1.2-beta.4](https://github.com/zepyrshut/pet-clinic/commit/368d1f895c92792e7d9a5c5fd60cf9b4da46cdee) - 2022-04-28
 ### Cambiado
 - Directorio _driver_ a _database_.
 

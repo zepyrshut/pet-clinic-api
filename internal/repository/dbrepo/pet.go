@@ -63,8 +63,48 @@ func (m *postgreDBRepo) OnePet(id int) (models.PetDTO, error) {
 	}
 
 	m.appendPerson(&pet)
-
 	return pet, nil
+}
+
+func (m *postgreDBRepo) AllPets() ([]models.PetDTO, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+
+	query := `SELECT 
+				id, pet_name, pet_type, pet_race, birth_date, created_at, updated_at 
+			  FROM
+			  	pet
+	`
+
+	rows, err := m.DB.QueryContext(ctx, query)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var pets []models.PetDTO
+
+	for rows.Next() {
+		var pet models.PetDTO
+		err := rows.Scan(
+			&pet.ID,
+			&pet.PetName,
+			&pet.PetType,
+			&pet.PetRace,
+			&pet.BirthDate,
+			&pet.CreatedAt,
+			&pet.UpdatedAt,
+		)
+
+		if err != nil {
+			return nil, err
+		}
+
+		m.appendPerson(&pet)
+		pets = append(pets, pet)
+	}
+
+	return pets, nil
 }
 
 func (m *postgreDBRepo) appendPerson(id *models.PetDTO) (*models.PetDTO, error) {
@@ -105,5 +145,4 @@ func (m *postgreDBRepo) appendPerson(id *models.PetDTO) (*models.PetDTO, error) 
 
 	id.Person = personAppend
 	return id, nil
-
 }

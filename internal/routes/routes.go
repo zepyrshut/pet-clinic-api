@@ -30,6 +30,7 @@ func Routes() *gin.Engine {
 	router.GET("/localize", util.GetLocalize)
 
 	// Pets
+	router.GET("/pets", handlers.Repo.GetAllPets)
 	router.GET("/one-pet/:id", handlers.Repo.GetOnePet)
 	router.POST("/new-pet", handlers.Repo.InsertNewPet)
 
