@@ -40,7 +40,6 @@ func ConnectSQL(dsn string) (*DB, error) {
 	}
 
 	return dbConn, nil
-
 }
 
 // Tries to ping the database.
@@ -68,5 +67,4 @@ func OpenDB(dsn string) (*sql.DB, error) {
 	}
 
 	return db, nil
-
 }

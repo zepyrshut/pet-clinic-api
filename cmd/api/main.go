@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/gin-gonic/gin"
 	"github.com/zepyrshut/pet-clinic/internal/config"
 	"github.com/zepyrshut/pet-clinic/internal/database"
 	"github.com/zepyrshut/pet-clinic/internal/handlers"
@@ -22,6 +23,20 @@ const inProduction = false
 var app config.Application
 
 func main() {
+	server, err := run()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Start server
+	err = server.Run("localhost:" + app.Config.Port)
+	if err != nil {
+		app.ErrorLog.Println(err)
+	}
+
+}
+
+func run() (*gin.Engine, error) {
 	// Environment variables
 	dsn := util.GoDotEnvVariable("DATA_SOURCE_NAME")
 	apiPort := util.GoDotEnvVariable("API_PORT")
@@ -57,10 +72,5 @@ func main() {
 	middleware.NewMiddleware(&app)
 	server := routes.Routes()
 
-	// Start server
-	err = server.Run("localhost:" + app.Config.Port)
-	if err != nil {
-		app.ErrorLog.Println(err)
-	}
-
+	return server, err
 }
