@@ -83,7 +83,6 @@ func (m *postgreDBRepo) AllPets() ([]models.PetDTO, error) {
 	defer rows.Close()
 
 	var pets []models.PetDTO
-
 	for rows.Next() {
 		var pet models.PetDTO
 		err := rows.Scan(

@@ -1,0 +1,1 @@
+add_index("pet_owner", "pet", {"unique": true})

@@ -63,7 +63,6 @@ func run() (*gin.Engine, error) {
 	if err != nil {
 		app.ErrorLog.Fatal(err)
 	}
-	defer db.SQL.Close()
 
 	// Initialize handlers and routes
 	routes.NewRoutes(&app)

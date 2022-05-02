@@ -14,7 +14,7 @@ import (
 
 // GoDotEnvVariable returns the value of the environment variable
 func GoDotEnvVariable(key string) string {
-	err := godotenv.Load("../../environment.env")
+	err := godotenv.Load("environment.env")
 	if err != nil {
 		log.Fatal("error loading environment variables")
 	}

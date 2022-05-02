@@ -103,7 +103,6 @@ ALTER SEQUENCE public.pet_id_seq OWNED BY public.pet.id;
 --
 
 CREATE TABLE public.pet_owner (
-    id integer NOT NULL,
     pet integer NOT NULL,
     person integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -112,28 +111,6 @@ CREATE TABLE public.pet_owner (
 
 
 ALTER TABLE public.pet_owner OWNER TO postgres;
-
---
--- Name: pet_owner_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.pet_owner_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.pet_owner_id_seq OWNER TO postgres;
-
---
--- Name: pet_owner_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.pet_owner_id_seq OWNED BY public.pet_owner.id;
-
 
 --
 -- Name: schema_migration; Type: TABLE; Schema: public; Owner: postgres
@@ -237,13 +214,6 @@ ALTER TABLE ONLY public.pet ALTER COLUMN id SET DEFAULT nextval('public.pet_id_s
 
 
 --
--- Name: pet_owner id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.pet_owner ALTER COLUMN id SET DEFAULT nextval('public.pet_owner_id_seq'::regclass);
-
-
---
 -- Name: veterinarian id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -263,14 +233,6 @@ ALTER TABLE ONLY public.visit ALTER COLUMN id SET DEFAULT nextval('public.visit_
 
 ALTER TABLE ONLY public.person
     ADD CONSTRAINT person_pkey PRIMARY KEY (id);
-
-
---
--- Name: pet_owner pet_owner_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.pet_owner
-    ADD CONSTRAINT pet_owner_pkey PRIMARY KEY (id);
 
 
 --
@@ -295,6 +257,13 @@ ALTER TABLE ONLY public.veterinarian
 
 ALTER TABLE ONLY public.visit
     ADD CONSTRAINT visit_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: pet_owner_pet_idx; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX pet_owner_pet_idx ON public.pet_owner USING btree (pet);
 
 
 --
